@@ -1,5 +1,18 @@
 import { z } from "zod";
 
+const loginSchema = z.object({
+  email: z
+    .string({ required_error: "email is required" })
+    .trim()
+    .min(10, { message: "Invalid Credentials" })
+    .max(40, { message: "Invalid Credentials" }),
+  password: z
+    .string({ required_error: "password is required" })
+    .trim()
+    .min(8, { message: "Invalid Credentials" })
+    .max(15, { message: "Invalid Credentials" }),
+});
+
 const signupSchema = z.object({
   userName: z
     .string({ required_error: "Name is required" })
@@ -23,4 +36,4 @@ const signupSchema = z.object({
     .max(15, { message: "password must not more than 15 charcterws" }),
 });
 
-export default signupSchema;
+export {signupSchema,loginSchema};;

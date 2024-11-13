@@ -13,7 +13,7 @@ const register = async (req, res) => {
     const { userName, email, phone, password } = req.body;
     const userExisted = await User.findOne({ $or: [{ email }, { phone }] });
     if (userExisted) {
-      return res.status(400).json({ msg: "User already exists" });
+      return res.status(400).json({ message: "User already exists" });
     }
     // hash the password
     const saltRounds = await bcrypt.genSalt(10);
@@ -27,7 +27,7 @@ const register = async (req, res) => {
     return res
       .status(201)
       .json({
-        msg: "Registration Successful",
+        message: "Registration Successful",
         token: await userCreated.generateToken(),
         userId: userCreated._id.toString(),
       });
@@ -51,7 +51,7 @@ const login = async (req, res) => {
       return res
         .status(200)
         .json({
-          msg: "Login Successful",
+          message: "Login Successful",
           token: await userExisted.generateToken(),
           userId: userExisted._id.toString(),
         });
@@ -63,4 +63,12 @@ const login = async (req, res) => {
   }
 };
 
-export { home, register, login };
+const user=async (req, res) => {
+  try {
+    const userData=req.user;
+    return res.status(200).json({userData});
+  } catch (error) {
+    console.log(`error from the user route ${error}`)
+  }
+}
+export { home, register, login,user };
