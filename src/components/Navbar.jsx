@@ -43,6 +43,7 @@ const Navbar = () => {
                   <li>
                     <NavLink to="/contact">Contact</NavLink>
                   </li>
+                  <li><NavLink to="/admin">Admin</NavLink></li>
                   {isLoggedIn ? (
                     <li>
                       <NavLink to="/logout">Logout</NavLink>

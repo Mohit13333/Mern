@@ -6,6 +6,8 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState();
   const [services, setServices] = useState([]);
+  // const [usersAllData, setUsersAllData] = useState([])
+  const userAuthToken=`Bearer ${token}`;
   const storeTokenInLs = (serverToken) => {
     setToken(serverToken);
     return localStorage.setItem("token", serverToken);
@@ -23,7 +25,7 @@ const AuthProvider = ({ children }) => {
         const response = await fetch("http://localhost:8000/api/auth/user", {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: userAuthToken,
           },
         });
         if (response.ok) {
@@ -54,7 +56,6 @@ const AuthProvider = ({ children }) => {
         );
         if(response.ok){
             const data=await response.json();
-            console.log(data);
             setServices(data.message)
         }
       } catch (error) {
@@ -64,9 +65,30 @@ const AuthProvider = ({ children }) => {
     Service();
   }, []);
 
+// get all users data
+  // useEffect(() => {
+  //   const getAllUsersData = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:8000/api/users/admin", {
+  //         method: "GET",
+  //         headers: {
+  //           Authorization: userAuthToken,
+  //         },
+  //       });
+  //       const data=await response.json();
+  //       console.log(data);
+  //       setUsersAllData(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getAllUsersData();
+  // }, []);
+
+
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, storeTokenInLs, LogoutUser, user,services}}
+      value={{ isLoggedIn, storeTokenInLs, LogoutUser, user,services,userAuthToken}}
     >
       {children}
     </AuthContext.Provider>
