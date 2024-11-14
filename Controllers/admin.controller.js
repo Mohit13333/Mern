@@ -63,7 +63,7 @@ const getUsersById=async (req, res, next) => {
             return res.status(400).json({ message: "User ID is required" });
         }
 
-        const results=await Contact.findOne({ _id: id });
+        const results=await User.findOne({ _id: id });
 
         return res.status(200).json({results});
     } catch (error) {

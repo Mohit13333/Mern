@@ -1,12 +1,5 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
-const home = async (req, res) => {
-  try {
-    res.send("Hello world by mohit");
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 const register = async (req, res) => {
   try {
@@ -71,4 +64,4 @@ const user=async (req, res) => {
     console.log(`error from the user route ${error}`)
   }
 }
-export { home, register, login,user };
+export { register, login,user };
