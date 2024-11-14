@@ -31,9 +31,7 @@ const Register = () => {
         },
         body: JSON.stringify(user),
       });
-      console.log(response);
       const data = await response.json();
-      console.log(data);
       if (response.ok) {
         storeTokenInLs(data.token);
         setUser({
