@@ -38,6 +38,24 @@ const deleteUser = async (req, res, next) => {
     }
 };
 
+const deleteContact = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        if (!id) {
+            return res.status(400).json({ message: "Contact ID is required" });
+        }
+
+        const result = await Contact.deleteOne({ _id: id });
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: "Contact not found" });
+        }
+
+        return res.status(200).json({ message: "Contact deleted successfully" });
+    } catch (error) {
+        next(error);
+    }
+};
+
 const getUsersById=async (req, res, next) => {
     try {
         const id = req.params.id;
@@ -45,7 +63,7 @@ const getUsersById=async (req, res, next) => {
             return res.status(400).json({ message: "User ID is required" });
         }
 
-        const results=await User.findOne({ _id: id }).select({password:0});
+        const results=await Contact.findOne({ _id: id });
 
         return res.status(200).json({results});
     } catch (error) {
@@ -65,4 +83,4 @@ const updateUser=async (req, res,next) => {
     }
 }
 
-export {adminPanel,deleteUser,getUsersById,updateUser};
+export {adminPanel,deleteUser,getUsersById,updateUser,deleteContact};
