@@ -1,0 +1,12 @@
+import { Router } from "express";
+import authMiddleware from "../middlewares/authMiddleware.js";
+import adminMiddleWare from "../middlewares/admin.middleware.js";
+import { adminPanel, deleteUser, getUsersById, updateUser } from "../Controllers/admin.controller.js";
+const router=Router();
+
+router.route("/admin").get(authMiddleware,adminMiddleWare,adminPanel)
+router.route("/admin/delete/:id").delete(authMiddleware,adminMiddleWare,deleteUser)
+router.route("/:id").get(authMiddleware,adminMiddleWare,getUsersById)
+router.route("/admin/update/:id").patch(authMiddleware,adminMiddleWare,updateUser)
+
+export {router};

@@ -4,6 +4,7 @@ import cors from "cors";
 import {router as authRouter} from "./Router/auth.router.js";
 import { router as formRouter } from "./Router/contact.router.js";
 import {router as serviceRouter} from "./Router/service.router.js";
+import {router as adminRouter} from "./Router/admin.route.js";
 import connectDB from "./utils/connectDB.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
 dotenv.config();
@@ -13,10 +14,8 @@ app.use(cors());
 app.use("/api/data",serviceRouter)
 app.use("/api/auth", authRouter);
 app.use("/api/form", formRouter);
+app.use("/api/users",adminRouter)
 app.use(errorMiddleware);
-app.get("/", (req, res) => {
-  res.send("welcome world");
-});
 
 connectDB()
   .then(() => {
