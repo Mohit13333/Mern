@@ -19,14 +19,14 @@ const Navbar = () => {
       <header className="relative">
         <div className="mx-auto max-w-screen-xl py-[4rem] px-[2.4rem] flex justify-between items-center">
           {/* Logo Section */}
-          <div className="font-[500] text-[1.8rem] text-blue-600 tracking-widest bg-transparent mr-3 w-fit whitespace-nowrap">
-            <NavLink to="/">Mohit Singh</NavLink>
+          <div className="">
+            <NavLink to="/"><img src="/images/excellence.png" alt="Excellence logo" className="max-w-[100px]" /></NavLink>
           </div>
 
           {/* Mobile Menu Toggle (Hamburger Icon) */}
           <button
             id="mobile-menu-toggle"
-            className="lg:hidden absolute top-4 right-6 text-3xl font-bold text-blue-600 cursor-pointer"
+            className="lg:hidden absolute top-4 mt-[20px] right-6 text-3xl font-bold text-blue-600 cursor-pointer"
             onClick={toggleMenu}
             aria-label="Toggle Navigation Menu"
             aria-expanded={isMenuVisible ? "true" : "false"}
