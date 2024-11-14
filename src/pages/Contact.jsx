@@ -25,7 +25,7 @@ const Contact = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8000/api/form/contact", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URI}/api/form/contact`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

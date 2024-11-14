@@ -23,7 +23,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8000/api/auth/login", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URI}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const Login = () => {
         toast.error(data.extraDetails ? data.extraDetails : data.message);
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error);
     }
   };
   return (

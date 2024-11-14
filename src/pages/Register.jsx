@@ -24,7 +24,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8000/api/auth/register", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URI}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const Register = () => {
         toast.error(data.extraDetails ? data.extraDetails : data.message);
       }
     } catch (error) {
-      console.log("failled", error);
+     toast.error(error);
     }
   };
   return (

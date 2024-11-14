@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import { toast } from "react-toastify";
 import { useAuth } from "../store/auth";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 const AdminUpdate = () => {
   const [updatedData, setUpdatedData] = useState({
@@ -15,7 +15,7 @@ const AdminUpdate = () => {
   const getSingleUserData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/users/${params.id}`,
+        `${import.meta.env.VITE_BACKEND_URI}/api/users/${params.id}`,
         {
           method: "GET",
           headers: {
@@ -45,9 +45,8 @@ const AdminUpdate = () => {
     e.preventDefault();
 
     try {
-      // console.log("updated", id);
       const response = await fetch(
-        `http://localhost:8000/api/users/admin/update/${params.id}`,
+        `${import.meta.env.VITE_BACKEND_URI}/api/users/admin/update/${params.id}`,
         {
           method: "PATCH",
           headers: {
@@ -58,10 +57,10 @@ const AdminUpdate = () => {
         }
       );
       const data = await response.json();
-    //   if (response.ok) {
+      if (response.ok) {
         toast.success(data.message);
-        console.log(data.message);
-    //   }
+        <Navigate to="/"/>
+      }
     } catch (error) {
       toast.error(error.message);
     }

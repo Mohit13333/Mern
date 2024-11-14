@@ -8,12 +8,15 @@ const UsersContact = () => {
 
   const getAllUsersContactData = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/users/admin", {
-        method: "GET",
-        headers: {
-          Authorization: userAuthToken,
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URI}/api/users/admin`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: userAuthToken,
+          },
+        }
+      );
       const data = await response.json();
       setAllContacts(data.contacts);
     } catch (error) {
@@ -26,9 +29,10 @@ const UsersContact = () => {
 
   const deleteUser = async (id) => {
     try {
-      console.log("deleted", id);
       const response = await fetch(
-        `http://localhost:8000/api/users/admin/delete/contact/${id}`,
+        `${
+          import.meta.env.VITE_BACKEND_URI
+        }/api/users/admin/delete/contact/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -50,7 +54,7 @@ const UsersContact = () => {
       <section className="mx-auto max-w-screen-xl p-4">
         <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
           <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
-           Users Contact Data
+            Users Contact Data
           </h1>
           <table className="min-w-full bg-white border-collapse">
             <thead>
@@ -85,7 +89,10 @@ const UsersContact = () => {
                     {curUser.message}
                   </td>
                   <td className="text-xl md:text-lg p-4 font-medium text-center text-red-500 ">
-                    <button className="hover:underline" onClick={() => deleteUser(curUser._id)}>
+                    <button
+                      className="hover:underline"
+                      onClick={() => deleteUser(curUser._id)}
+                    >
                       Delete
                     </button>
                   </td>

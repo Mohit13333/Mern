@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
     const userAuthentication = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("http://localhost:8000/api/auth/user", {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URI}/api/auth/user`, {
           method: "GET",
           headers: {
             Authorization: userAuthToken,
@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
     const Service = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/data/services",
+          `${import.meta.env.VITE_BACKEND_URI}/api/data/services`,
           {
             method: "GET",
             header: {
@@ -72,7 +72,7 @@ const AuthProvider = ({ children }) => {
   // useEffect(() => {
   //   const getAllUsersData = async () => {
   //     try {
-  //       const response = await fetch("http://localhost:8000/api/users/admin", {
+  //       const response = await fetch(`${import.meta.env.VITE_BACKEND_URI}/api/users/admin`, {
   //         method: "GET",
   //         headers: {
   //           Authorization: userAuthToken,

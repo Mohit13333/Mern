@@ -10,7 +10,7 @@ const Users = () => {
 
   const getAllUsersData = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/users/admin", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URI}/api/users/admin`, {
         method: "GET",
         headers: {
           Authorization: userAuthToken,
@@ -28,9 +28,8 @@ const Users = () => {
 
   const deleteUser = async (id) => {
     try {
-      console.log("deleted", id);
       const response = await fetch(
-        `http://localhost:8000/api/users/admin/delete/${id}`,
+        `${import.meta.env.VITE_BACKEND_URI}/api/users/admin/delete/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -39,7 +38,6 @@ const Users = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
       toast.success(data.message);
       if (response.ok) {
         getAllUsersData();
