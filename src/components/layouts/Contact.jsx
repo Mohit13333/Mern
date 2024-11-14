@@ -37,7 +37,6 @@ const UsersContact = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
       toast.success(data.message);
       if (response.ok) {
         getAllUsersContactData();
