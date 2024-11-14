@@ -1,13 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState();
   const [services, setServices] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   // const [usersAllData, setUsersAllData] = useState([])
-  const userAuthToken=`Bearer ${token}`;
+  const userAuthToken = `Bearer ${token}`;
   const storeTokenInLs = (serverToken) => {
     setToken(serverToken);
     return localStorage.setItem("token", serverToken);
@@ -15,13 +16,13 @@ const AuthProvider = ({ children }) => {
   const isLoggedIn = !!token;
   const LogoutUser = () => {
     setToken("");
-    toast.success("Logged out successfully");
     return localStorage.removeItem("token");
   };
   // Authentication
   useEffect(() => {
     const userAuthentication = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch("http://localhost:8000/api/auth/user", {
           method: "GET",
           headers: {
@@ -30,8 +31,10 @@ const AuthProvider = ({ children }) => {
         });
         if (response.ok) {
           const data = await response.json();
-          // console.log(data.userData);
           setUser(data.userData);
+          setIsLoading(false);
+        } else {
+          setIsLoading(false);
         }
       } catch (error) {
         console.log("Error while fetching data");
@@ -54,9 +57,9 @@ const AuthProvider = ({ children }) => {
             },
           }
         );
-        if(response.ok){
-            const data=await response.json();
-            setServices(data.message)
+        if (response.ok) {
+          const data = await response.json();
+          setServices(data.message);
         }
       } catch (error) {
         console.log(error);
@@ -65,7 +68,7 @@ const AuthProvider = ({ children }) => {
     Service();
   }, []);
 
-// get all users data
+  // get all users data
   // useEffect(() => {
   //   const getAllUsersData = async () => {
   //     try {
@@ -85,10 +88,17 @@ const AuthProvider = ({ children }) => {
   //   getAllUsersData();
   // }, []);
 
-
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, storeTokenInLs, LogoutUser, user,services,userAuthToken}}
+      value={{
+        isLoggedIn,
+        storeTokenInLs,
+        LogoutUser,
+        user,
+        services,
+        userAuthToken,
+        isLoading
+      }}
     >
       {children}
     </AuthContext.Provider>

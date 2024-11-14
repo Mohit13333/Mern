@@ -19,61 +19,45 @@ const [userData,setUserData]=useState(true)
 
   return (
     <>
-      <main>
-        <Navbar />
-        <section className="">
-          <div className="md:grid md:grid-cols-2 max-sm:grid max-sm:grid-cols-1 max-sm:justify-items-center mx-auto max-w-screen-xl py-[4rem] px-[2.4rem] justify-between place-content-center">
-            <div className="capitalize">
-              <p className="my-3 capitalize">Hi,Welcome { user? userName.userName:`to our website`}</p>
-              <h1 className="my-3 capitalize">Why choose us</h1>
-              <p className="my-5">
-                Expertise: Our team consists of experienced IT professionals who
-                are passionate about staying up-to-date with the latest industry
-                trends.
-              </p>
-              <p className="my-5">
-                Customization: We understand that every business is unique.
-                Thats why we create solutions that are tailored to your specific
-                needs and goals.
-              </p>
-              <p className="my-5">
-                Customer-Centric Approach: We prioritize your satisfaction and
-                provide top-notch support to address your IT concerns.
-              </p>
-              <p className="my-5">
-                Affordability: We offer competitive pricing without compromising
-                on the quality of our services.
-              </p>
-              <p className="my-5">
-                Reliability: Count on us to be there when you need us. We're
-                committed to ensuring your IT environment is reliable and
-                available 24/7.
-              </p>
-              <div className="grid grid-flow-col w-fit gap-[3.2rem]">
-                <NavLink to="/contact">
-                  <button className="text-xl bg-blue-800 py-4 px-9 font-[500] capitalize rounded-[0.8rem] border-[0.1rem] border-solid border-transparent cursor-pointer hover:shadow-inner hover:shadow-white">
-                    Contact Now
-                  </button>
-                </NavLink>
-                <NavLink to="/services">
-                  <button className="text-xl bg-transparent py-4 px-9 font-[500] capitalize rounded-[0.8rem] ml-[3.2rem] border-[0.1rem] border-solid border-blue-400 cursor-pointer hover:shadow-inner hover:shadow-white">
-                    Learn More
-                  </button>
-                </NavLink>
-              </div>
+     <main>
+      <Navbar />
+
+      {/* About Section */}
+      <section className="max-w-screen-xl mx-auto rounded-[1rem] bg-gray-50 py-16">
+        <div className="container mx-auto max-w-screen-xl px-6 md:flex md:justify-between md:items-center">
+          <div className="md:w-1/2 text-center md:text-left space-y-6">
+            <p className="text-lg text-gray-600">Hi, Welcome {user ? userName.userName : `to our website`}</p>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Why Choose Us</h1>
+            <div className="text-gray-700 space-y-5">
+              <p><strong>Expertise:</strong> Our team consists of experienced IT professionals who stay updated with the latest industry trends.</p>
+              <p><strong>Customization:</strong> We create tailored solutions specific to your unique business needs and goals.</p>
+              <p><strong>Customer-Centric:</strong> We prioritize your satisfaction and provide top-notch support for all IT concerns.</p>
+              <p><strong>Affordability:</strong> We offer competitive pricing without compromising on quality.</p>
+              <p><strong>Reliability:</strong> Count on us to ensure your IT environment is secure and available 24/7.</p>
             </div>
-            <div className="flex justify-center items-center">
-              <img
-                src="/images/about.png"
-                alt="home"
-                className="max-w-[300px] max-h-[300px]"
-              />
+            <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-6">
+              <NavLink to="/contact">
+                <button className="text-lg bg-blue-800 text-white py-3 px-8 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
+                  Contact Now
+                </button>
+              </NavLink>
+              <NavLink to="/services">
+                <button className="text-lg bg-transparent text-blue-800 py-3 px-8 border border-blue-800 rounded-lg font-semibold hover:bg-blue-100 transition duration-200">
+                  Learn More
+                </button>
+              </NavLink>
             </div>
           </div>
-        </section>
-        <Analytics />
-        <Footer/>
-      </main>
+
+          <div className="md:w-1/2 flex justify-center mt-8 md:mt-0">
+            <img src="/images/about.png" alt="about us" className="w-72 h-72 object-contain" />
+          </div>
+        </div>
+      </section>
+
+      <Analytics />
+      <Footer />
+    </main>
     </>
   );
 };

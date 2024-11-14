@@ -12,7 +12,7 @@ const AdminUpdate = () => {
   });
   const params = useParams();
   const { userAuthToken } = useAuth();
-  const getSingleUserData = async (id) => {
+  const getSingleUserData = async () => {
     try {
       const response = await fetch(
         `http://localhost:8000/api/users/${params.id}`,
@@ -68,19 +68,23 @@ const AdminUpdate = () => {
   };
   return (
     <>
-      <section>
-        <main className="flex justify-center">
-          <div className="mx-auto max-w-screen-xl py-[4rem] px-[2.4rem] justify-between place-content-center">
-            <div>
-              <h1 className="mb-4 relative after:absolute after:content-[''] after:left-0 after:bottom-0 after:w-[50%] after:h-[0.5rem] after:bg-blue-500">
-                Update Details
-              </h1>
-              <form
-                action=""
-                className="grid grid-flow-row w-fit gap-5 border border-blue-400 p-[20px]"
-                onSubmit={handleFormSubmit}
-              >
-                <label htmlFor="userName">Username</label>
+       <section >
+      <main className="">
+        <div className="mx-auto max-w-screen-xl py-[4rem] px-[2.4rem] w-full">
+          <div className="bg-white shadow-lg rounded-lg p-8">
+            <h1 className="text-3xl font-semibold text-center mb-6 relative after:absolute after:content-[''] after:left-0 after:bottom-0 after:w-[fit] after:h-[0.5rem] after:bg-blue-500">
+              Update Details
+            </h1>
+            <form
+              action=""
+              className="grid grid-flow-row gap-6"
+              onSubmit={handleFormSubmit}
+            >
+              {/* Username Input */}
+              <div className="space-y-2">
+                <label htmlFor="userName" className="text-lg font-medium">
+                  Username
+                </label>
                 <input
                   type="text"
                   name="userName"
@@ -89,9 +93,15 @@ const AdminUpdate = () => {
                   onChange={handleInputChange}
                   required
                   autoComplete="off"
-                  className="bg-gray-100 border text-black border-blue-400 rounded-lg py-2 px-[0.3rem]"
+                  className="w-full bg-gray-100 border text-black border-blue-400 rounded-lg py-2 px-3"
                 />
-                <label htmlFor="email">Email</label>
+              </div>
+
+              {/* Email Input */}
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-lg font-medium">
+                  Email
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -100,9 +110,15 @@ const AdminUpdate = () => {
                   onChange={handleInputChange}
                   required
                   autoComplete="off"
-                  className="bg-gray-100 border text-black border-blue-400 rounded-lg py-2 px-[0.3rem]"
+                  className="w-full bg-gray-100 border text-black border-blue-400 rounded-lg py-2 px-3"
                 />
-                <label htmlFor="phone">Phone</label>
+              </div>
+
+              {/* Phone Input */}
+              <div className="space-y-2">
+                <label htmlFor="phone" className="text-lg font-medium">
+                  Phone
+                </label>
                 <input
                   type="phone"
                   name="phone"
@@ -111,20 +127,25 @@ const AdminUpdate = () => {
                   onChange={handleInputChange}
                   required
                   autoComplete="off"
-                  className="bg-gray-100 border text-black border-blue-400 rounded-lg py-2 px-[0.3rem]"
+                  className="w-full bg-gray-100 border text-black border-blue-400 rounded-lg py-2 px-3"
                 />
+              </div>
+
+              {/* Submit Button */}
+              <div className="mt-6 flex justify-center">
                 <button
                   type="submit"
-                  className="text-white bg-blue-800 py-4 px-9 font-[500] text-[1.7rem] capitalize  rounded-[0.8rem] border-[0.1rem] border-solid border-transparent tracking-widest cursor-pointer hover:shadow-inner hover:shadow-white"
+                  className="text-white bg-blue-800 py-4 px-9 font-medium text-lg capitalize rounded-lg border border-transparent cursor-pointer hover:bg-blue-700 transition-shadow"
                 >
                   Submit
                 </button>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
-        </main>
-      </section>
+        </div>
+      </main>
       <Footer />
+    </section>
     </>
   );
 };

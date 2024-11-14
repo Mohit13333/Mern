@@ -50,59 +50,37 @@ const Users = () => {
   };
   return (
     <>
-      <section className="mx-auto max-w-screen-xl">
-        <div>
-          <h1>Users Data</h1>
-          <div>
-            <table className="bg-white shadow-lg shadow-gray-600 border-collapse rounded-[1rem]">
-              <thead>
-                <tr className="border-b-2 border-black">
-                  <th className="text-[1.7re md:p-[2rem] max-sm:p-[1.5rem] font-bold text-center text-black tracking-widest max-sm:w-[10rem]">
-                    Name
-                  </th>
-                  <th className="text-[1.7re md:p-[2rem] max-sm:p-[1.5rem] font-bold text-center text-black tracking-widest max-sm:w-[10rem]">
-                    Email
-                  </th>
-                  <th className="text-[1.7re md:p-[2rem] max-sm:p-[1.5rem] font-bold text-center text-black tracking-widest max-sm:w-[10rem]">
-                    Phone
-                  </th>
-                  <th className="text-[1.7re md:p-[2rem] max-sm:p-[1.5rem] font-bold text-center text-black tracking-widest max-sm:w-[10rem]">
-                    Update
-                  </th>
-                  <th className="text-[1.7re md:p-[2rem] max-sm:p-[1.5rem] font-bold text-center text-black tracking-widest max-sm:w-[10rem]">
-                    Delete
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {usersAllData.map((curUser, index) => {
-                  return (
-                    <tr key={index} className="border-b-2 border-black">
-                      <td className="text-[1.7rem]  md:p-[2rem] max-sm:p-[1.5rem] font-semibold text-center text-gray-700 tracking-widest md:w-[20rem] max-sm:w-[10rem]">
-                        {curUser.userName}
-                      </td>
-                      <td className="text-[1.7rem]  md:p-[2rem] max-sm:p-[1.5rem] font-semibold text-center text-gray-700 tracking-widest md:w-[20rem] max-sm:w-[10rem]">
-                        {curUser.email}
-                      </td>
-                      <td className="text-[1.7rem]  md:p-[2rem] max-sm:p-[1.5rem] font-semibold text-center text-gray-700 tracking-widest md:w-[20rem] max-sm:w-[10rem]">
-                        {curUser.phone}
-                      </td>
-                      <td className="text-[1.7rem]  md:p-[2rem] max-sm:p-[1.5rem] font-semibold text-center text-gray-700 tracking-widest md:w-[20rem] max-sm:w-[10rem]">
-                        <Link to={`/admin/users/${curUser._id}/edit`}>Update</Link>
-                      </td>
-                      <td className="text-[1.7rem]  md:p-[2rem] max-sm:p-[1.5rem] font-semibold text-center text-gray-700 tracking-widest md:w-[20rem] max-sm:w-[10rem]">
-                        <button onClick={() => deleteUser(curUser._id)}>
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
+    <section className="mx-auto max-w-screen-xl p-4">
+  <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
+    <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Users Data</h1>
+    <table className="min-w-full bg-white border-collapse">
+      <thead>
+        <tr className="bg-gray-100 border-b border-gray-200">
+          <th className="text-md md:text-lg p-4 font-semibold text-gray-600 text-center tracking-wider">Name</th>
+          <th className="text-md md:text-lg p-4 font-semibold text-gray-600 text-center tracking-wider">Email</th>
+          <th className="text-md md:text-lg p-4 font-semibold text-gray-600 text-center tracking-wider">Phone</th>
+          <th className="text-md md:text-lg p-4 font-semibold text-gray-600 text-center tracking-wider">Update</th>
+          <th className="text-md md:text-lg p-4 font-semibold text-gray-600 text-center tracking-wider">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {usersAllData.map((curUser, index) => (
+          <tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
+            <td className="text-md md:text-lg p-4 font-medium text-center text-gray-700">{curUser.userName}</td>
+            <td className="text-md md:text-lg p-4 font-medium text-center text-gray-700">{curUser.email}</td>
+            <td className="text-md md:text-lg p-4 font-medium text-center text-gray-700">{curUser.phone}</td>
+            <td className="text-md md:text-lg p-4 font-medium text-center text-blue-500 hover:underline">
+              <Link to={`/admin/users/${curUser._id}/edit`}>Update</Link>
+            </td>
+            <td className="text-xl md:text-lg p-4 font-medium text-center text-red-500">
+              <button className="hover:underline" onClick={() => deleteUser(curUser._id)}>Delete</button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
     </>
   );
 };
